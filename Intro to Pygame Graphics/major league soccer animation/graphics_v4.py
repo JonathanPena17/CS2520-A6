@@ -121,7 +121,7 @@ while not done:
         for s in stars:
             pygame.draw.ellipse(screen, WHITE, s)
 
-
+################################################################################################
 
 
     pygame.draw.rect(screen, field_color, [0, 180, 800 , 420])
@@ -236,7 +236,7 @@ while not done:
     pygame.draw.ellipse(screen, light_color, [650, 20, 20, 20])
     pygame.draw.ellipse(screen, light_color, [670, 20, 20, 20])
     pygame.draw.line(screen, GRAY, [590, 20], [690, 20], 2)
-
+################################################################################################
     #net
     pygame.draw.line(screen, WHITE, [325, 140], [341, 200], 1)
     pygame.draw.line(screen, WHITE, [330, 140], [344, 200], 1)

@@ -46,7 +46,21 @@ SEE_THROUGH = pygame.Surface((800, 180))
 SEE_THROUGH.set_alpha(150)
 SEE_THROUGH.fill((124, 118, 135))
 
-def draw_cloud(x, y):
+# x and y are the values in which the random range will produce the stars position
+def draw_stars(x, y):
+    stars = []
+    for n in range(200):
+    x_pos = random.randrange(0, x)
+    y_pos = random.randrange(0, y)
+    r_pos = random.randrange(1, 2)
+    stars.append([x_pos, y_pos, r_pos, r_pos])
+
+    for s in stars:
+         pygame.draw.ellipse(screen, WHITE, s)
+
+
+
+def shape_cloud(x, y):
     pygame.draw.ellipse(SEE_THROUGH, cloud_color, [x, y + 8, 10, 10])
     pygame.draw.ellipse(SEE_THROUGH, cloud_color, [x + 6, y + 4, 8, 8])
     pygame.draw.ellipse(SEE_THROUGH, cloud_color, [x + 10, y, 16, 16])
@@ -54,29 +68,42 @@ def draw_cloud(x, y):
     pygame.draw.rect(SEE_THROUGH, cloud_color, [x + 6, y + 8, 18, 10])
 
 
-# Config
-lights_on = True
-day = True
-
-stars = []
-for n in range(200):
-    x = random.randrange(0, 800)
-    y = random.randrange(0, 200)
-    r = random.randrange(1, 2)
-    stars.append([x, y, r, r])
-
-clouds = []
-for i in range(20):
-    x = random.randrange(-100, 1600)
-    y = random.randrange(0, 150)
-    clouds.append([x, y])
+#will shape the clouds using shape_cloud and also place them on the screen
+def draw_clouds(x, y):
+    clouds = []
+    for i in range(20):
+        x_pos = random.randrange(-100, x)
+        y_pos = random.randrange(0, y)
+        clouds.append([x_pos, y]_pos)
     
-# Game loop
-done = False
+    for c in clouds:
+        shape_cloud(c[0], c[1])
+    screen.blit(SEE_THROUGH, (0, 0))
 
-while not done:
-    # Event processing (React to key presses, mouse clicks, etc.)
-    ''' for now, we'll just check to see if the X is clicked '''
+    #for c in clouds:
+    c[0] -= 0.5
+
+        if c[0] < -100:
+            c[0] = random.randrange(800, 1600)
+            c[1] = random.randrange(0, 150)
+
+
+#changes scene to daytime colors 
+def set_day():
+    sky_color = BLUE
+    field_color = GREEN
+    stripe_color = DAY_GREEN
+    cloud_color = WHITE
+
+#changes scene to nighttime colors
+def set_night():
+    sky_color = DARK_BLUE
+    field_color = DARK_GREEN
+    stripe_color = NIGHT_GREEN
+    cloud_color = NIGHT_GRAY
+
+#checks for inputs that would alter the game
+def check_events():
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
@@ -86,40 +113,30 @@ while not done:
             elif event.key == pygame.K_d:
                 day = not day
 
+
+# Game loop
+done = False
+while not done:
+    # Event processing (React to key presses, mouse clicks, etc.)
+    check_events()
+
     # Game logic (Check for collisions, update points, etc.)
-    ''' leave this section alone for now ''' 
     if lights_on:
         light_color = YELLOW
     else:
         light_color = SILVER
 
     if day:
-        sky_color = BLUE
-        field_color = GREEN
-        stripe_color = DAY_GREEN
-        cloud_color = WHITE
+        set_day()
     else:
-        sky_color = DARK_BLUE
-        field_color = DARK_GREEN
-        stripe_color = NIGHT_GREEN
-        cloud_color = NIGHT_GRAY
+        set_night()
+        draw_stars(800,200)
 
-    for c in clouds:
-        c[0] -= 0.5
-
-        if c[0] < -100:
-            c[0] = random.randrange(800, 1600)
-            c[1] = random.randrange(0, 150)
-            
-    # Drawing code (Describe the picture. It isn't actually drawn yet.)
+    draw_clouds(1600, 150)
+    
     screen.fill(sky_color)
     SEE_THROUGH.fill(ck)
     SEE_THROUGH.set_colorkey(ck)
-    
-    if not day:
-    #stars
-        for s in stars:
-            pygame.draw.ellipse(screen, WHITE, s)
 
 ################################################################################################
 

@@ -74,7 +74,7 @@ def draw_clouds(x, y):
     for i in range(20):
         x_pos = random.randrange(-100, x)
         y_pos = random.randrange(0, y)
-        clouds.append([x_pos, y]_pos)
+        clouds.append([x_pos, y_pos])
     
     for c in clouds:
         shape_cloud(c[0], c[1])

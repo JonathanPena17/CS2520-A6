@@ -50,10 +50,10 @@ SEE_THROUGH.fill((124, 118, 135))
 def draw_stars(x, y):
     stars = []
     for n in range(200):
-    x_pos = random.randrange(0, x)
-    y_pos = random.randrange(0, y)
-    r_pos = random.randrange(1, 2)
-    stars.append([x_pos, y_pos, r_pos, r_pos])
+        x_pos = random.randrange(0, x)
+        y_pos = random.randrange(0, y)
+        r_pos = random.randrange(1, 2)
+        stars.append([x_pos, y_pos, r_pos, r_pos])
 
     for s in stars:
          pygame.draw.ellipse(screen, WHITE, s)
@@ -80,9 +80,8 @@ def draw_clouds(x, y):
         shape_cloud(c[0], c[1])
     screen.blit(SEE_THROUGH, (0, 0))
 
-    #for c in clouds:
-    c[0] -= 0.5
-
+    for c in clouds:
+        c[0] -= 0.5
         if c[0] < -100:
             c[0] = random.randrange(800, 1600)
             c[1] = random.randrange(0, 150)

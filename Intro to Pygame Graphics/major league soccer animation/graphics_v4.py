@@ -112,6 +112,9 @@ def check_events():
             elif event.key == pygame.K_d:
                 day = not day
 
+#config
+lights_on = True
+day = True
 
 # Game loop
 done = False

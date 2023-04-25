@@ -1,6 +1,6 @@
 # CS2520-A6
 Assignment 6
 
-Andrew Perez
+Andrew Perez lines 1 - 140
 
-Jonathan Peña
+Jonathan Peña lines 140 - 277

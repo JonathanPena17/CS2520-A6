@@ -363,20 +363,10 @@ while not done:
     if not day and not lights_on:
         screen.blit(DARKNESS, (0, 0))    
     
-    #pygame.draw.polygon(screen, BLACK, [[200, 200], [50,400], [600, 500]], 10)
-
-    ''' angles for arcs are measured in radians (a pre-cal topic) '''
-    #pygame.draw.arc(screen, ORANGE, [100, 100, 100, 100], 0, math.pi/2, 1)
-    #pygame.draw.arc(screen, BLACK, [100, 100, 100, 100], 0, math.pi/2, 50)
-
-
-    # Update screen (Actually draw the picture in the window.)
     pygame.display.flip()
-
 
     # Limit refresh rate of game loop 
     clock.tick(refresh_rate)
-
 
 # Close window and quit
 pygame.quit()

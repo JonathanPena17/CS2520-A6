@@ -46,6 +46,20 @@ SEE_THROUGH = pygame.Surface((800, 180))
 SEE_THROUGH.set_alpha(150)
 SEE_THROUGH.fill((124, 118, 135))
 
+#changes scene to daytime colors 
+def set_day():
+    sky_color = BLUE
+    field_color = GREEN
+    stripe_color = DAY_GREEN
+    cloud_color = WHITE
+
+#changes scene to nighttime colors
+def set_night():
+    sky_color = DARK_BLUE
+    field_color = DARK_GREEN
+    stripe_color = NIGHT_GREEN
+    cloud_color = NIGHT_GRAY
+
 # x and y are the values in which the random range will produce the stars position
 def draw_stars(x, y):
     stars = []
@@ -87,19 +101,7 @@ def draw_clouds(x, y):
             c[1] = random.randrange(0, 150)
 
 
-#changes scene to daytime colors 
-def set_day():
-    sky_color = BLUE
-    field_color = GREEN
-    stripe_color = DAY_GREEN
-    cloud_color = WHITE
 
-#changes scene to nighttime colors
-def set_night():
-    sky_color = DARK_BLUE
-    field_color = DARK_GREEN
-    stripe_color = NIGHT_GREEN
-    cloud_color = NIGHT_GRAY
 
     
 #config

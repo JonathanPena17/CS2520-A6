@@ -6,17 +6,19 @@ import random
 # Initialize game engine
 pygame.init()
 
-
 # Window
 SIZE = (800, 600)
 TITLE = "Major League Soccer"
 screen = pygame.display.set_mode(SIZE)
 pygame.display.set_caption(TITLE)
 
-
 # Timer
 clock = pygame.time.Clock()
 refresh_rate = 60
+
+#config
+lights_on = True
+day = True
 
 
 # Colors
@@ -72,42 +74,27 @@ def draw_stars(x, y):
     for s in stars:
          pygame.draw.ellipse(screen, WHITE, s)
 
-
-
-def shape_cloud(x, y):
+def draw_cloud(x, y):
+    cloud_color = WHITE
     pygame.draw.ellipse(SEE_THROUGH, cloud_color, [x, y + 8, 10, 10])
     pygame.draw.ellipse(SEE_THROUGH, cloud_color, [x + 6, y + 4, 8, 8])
     pygame.draw.ellipse(SEE_THROUGH, cloud_color, [x + 10, y, 16, 16])
     pygame.draw.ellipse(SEE_THROUGH, cloud_color, [x + 20, y + 8, 10, 10])
     pygame.draw.rect(SEE_THROUGH, cloud_color, [x + 6, y + 8, 18, 10])
 
-
-#will shape the clouds using shape_cloud and also place them on the screen
-def draw_clouds(x, y):
+# generate the number of desired clouds 
+def generate_clouds(num_clouds):
     clouds = []
-    for i in range(20):
-        x_pos = random.randrange(-100, x)
-        y_pos = random.randrange(0, y)
-        clouds.append([x_pos, y_pos])
-    
-    for c in clouds:
-        shape_cloud(c[0], c[1])
-    screen.blit(SEE_THROUGH, (0, 0))
+    for i in range(num_clouds):
+        x = random.randrange(-100, 1600)
+        y = random.randrange(0, 150)
+        clouds.append([x, y])
+    return clouds
 
-    for c in clouds:
-        c[0] -= 0.5
-        if c[0] < -100:
-            c[0] = random.randrange(800, 1600)
-            c[1] = random.randrange(0, 150)
+clouds = generate_clouds(20)
 
 
 
-
-    
-#config
-lights_on = True
-day = True
-    
 
 #checks for inputs that would alter the game
 def check_events():
@@ -139,8 +126,15 @@ while not done:
         set_night()
         draw_stars(800,200)
 
-    draw_clouds(1600, 150)
+    for c in clouds:
+        c[0] -= 0.5
+
+        if c[0] < -100:
+            c[0] = random.randrange(800, 1600)
+            c[1] = random.randrange(0, 150)
+
     
+    sky_color = BLUE
     screen.fill(sky_color)
     SEE_THROUGH.fill(ck)
     SEE_THROUGH.set_colorkey(ck)
@@ -195,8 +189,8 @@ while not done:
     
     #This draws the clouds in the background
     for c in clouds:
-        draw_clouds(c[0], c[1])
-    screen.blit(SEE_THROUGH, (0, 0))
+        draw_cloud(c[0], c[1])
+    screen.blit(SEE_THROUGH, (0, 0)) 
 
     #draw_lines function is used to draw lines
     def draw_lines(start_pos, end_pos, width):
